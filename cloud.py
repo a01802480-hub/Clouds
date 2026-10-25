@@ -1,5 +1,6 @@
 import s3fs
 import xarray as xr
+import os
 
 # Step 1: Connect to the public NOAA GOES S3 bucket anonymously
 fs = s3fs.S3FileSystem(anon=True)
@@ -17,5 +18,5 @@ with fs.open(file_list[0]) as f:
     # Extract Cloud Top Infrared Brightness Temperature (Band 13)
     cloud_top_ir = ds["CMI_C13"].values
     print("Cloud Top IR Matrix Shape:", cloud_top_ir.shape)
-    ds["CMI_C13"].to_netcdf(r"C:\Users\Santiago Arizpe\OneDrive\Desktop\Clouds\goes19_band13.nc")
+    ds["CMI_C13"].to_netcdf(os.getenv("SAVE_PATH"))
     print("Saved the Band 13 data to goes19_band13.nc")

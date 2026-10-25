@@ -3,7 +3,7 @@ import xarray as xr
 import pandas as pd
 import pyproj
 import numpy as np
-
+import os
 # 1. Connect to AWS and open the files (same as before)
 fs = s3fs.S3FileSystem(anon=True)
 
@@ -64,6 +64,6 @@ with fs.open(cps_files[0]) as f_cps, fs.open(ctt_files[0]) as f_ctt, fs.open(pre
             
     # 4. Export to CSV 
     df = pd.DataFrame(records)
-    csv_path = r"C:\Users\Santiago Arizpe\OneDrive\Desktop\Clouds\foit_model_gps_aligned.csv"
+    csv_path = os.getenv("CSV_PATH2")
     df.to_csv(csv_path, index=False)
     print(f"Success! GPS coordinates mapped and saved to: {csv_path}")

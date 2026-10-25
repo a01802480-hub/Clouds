@@ -1,6 +1,7 @@
 import s3fs
 import xarray as xr
 import pandas as pd
+import os
 
 # 1. Connect to AWS
 fs = s3fs.S3FileSystem(anon=True)
@@ -44,7 +45,7 @@ with fs.open(cps_files[0]) as f_cps, fs.open(ctt_files[0]) as f_ctt:
             
     # 5. Export to CSV 
     df = pd.DataFrame(records)
-    csv_path = r"C:\Users\Santiago Arizpe\OneDrive\Desktop\Clouds\foit_model_data.csv"
+    csv_path = os.getenv("CSV_PATH3")
     df.to_csv(csv_path, index=False)
     
     print(f"Success! Generated kinematic data at: {csv_path}")

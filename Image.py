@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 
 # 1. Point to your exact folder location
-folder_path = r"C:\Users\Santiago Arizpe\OneDrive\Desktop\Clouds"
+folder_path = os.getenv("FOLDER_PATH")  # Use the environment variable for folder path
 
 # Find the .nc file you downloaded
 nc_files = [f for f in os.listdir(folder_path) if f.endswith('.nc')]
